@@ -1,0 +1,31 @@
+version: '3.4'
+
+networks:
+  backend:
+
+services:
+  customerdb:
+    container_name: customer-db
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "vip1111"
+    networks:
+      - backend
+    ports:
+      - "8001:1433"
+  customerservices:
+    container_name: customer-api
+    image: ${DOCKER_REGISTRY-}customerservices
+    build:
+      context: .
+      dockerfile: CustomerServices/Dockerfile
+    environment:
+      - DB_HOST=customer-db
+      - DB_NAME=AutoMigration
+      - DB_SA_PASSWORD=P@ssw0rd123!
+    networks:
+      - backend
+    ports:
+      - "8002:80"
+
