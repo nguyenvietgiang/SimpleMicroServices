@@ -1,4 +1,4 @@
-version: '3.4'
+version: "3.4"
 
 networks:
   backend:
@@ -9,7 +9,7 @@ services:
     image: mcr.microsoft.com/mssql/server:2019-latest
     environment:
       ACCEPT_EULA: "Y"
-      SA_PASSWORD: "vip1111"
+      SA_PASSWORD: "Strong_Password_123!"
     networks:
       - backend
     ports:
@@ -28,4 +28,3 @@ services:
       - backend
     ports:
       - "8002:80"
-
